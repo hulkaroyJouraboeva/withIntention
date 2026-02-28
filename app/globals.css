@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: #fdf6e3;
+    --foreground: #111827;
+    --surface: #ffffff;
+    --panel: rgba(255, 255, 255, 0.7);
+    --muted: #9ca3af;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    --blur: blur(12px);
+}
+
+.dark {
+    --background: #0f1115;
+    --foreground: #f9fafb;
+    --surface: #1a1d24;
+    --panel: rgba(255, 255, 255, 0.03);
+    --muted: #6b7280;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent: #818cf8;
+    --accent-hover: #6366f1;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    --blur: blur(16px);
+}
+
+@layer base {
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        @apply antialiased transition-colors duration-300;
+    }
+}
+
+@layer utilities {
+    .glass-panel {
+        background: var(--panel);
+        backdrop-filter: var(--blur);
+        -webkit-backdrop-filter: var(--blur);
+        border: var(--glass-border);
+        box-shadow: var(--glass-shadow);
+    }
+
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 to-purple-500;
+    }
+}
