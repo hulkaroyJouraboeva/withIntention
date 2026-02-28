@@ -1,9 +1,11 @@
 "use client"
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { BarChart3, PlusCircle, Library, Settings, Moon, Sun } from 'lucide-react'
+import { LogOut, BarChart3, PlusCircle, Library, Settings, Moon, Sun } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
+import { logout } from '@/app/login/actions'
+import { useRouter } from 'next/navigation'
 
 export function Sidebar() {
     const pathname = usePathname()
@@ -13,6 +15,18 @@ export function Sidebar() {
         const isDark = document.documentElement.classList.contains('dark')
         setTheme(isDark ? 'dark' : 'light')
     }, [])
+
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        try {
+            await logout()
+            router.push('/login')
+            router.refresh()
+        } catch (error) {
+            console.error('Logout failed:', error)
+        }
+    }
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -56,7 +70,14 @@ export function Sidebar() {
                 })}
             </ul>
 
-            <div className="mt-auto pt-4 border-t border-border-color">
+            <div className="mt-auto pt-4 border-t border-border-color flex flex-col gap-2">
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[0.95rem] font-medium text-red-500/80 hover:bg-red-500/10 hover:text-red-500 transition-colors"
+                >
+                    <LogOut className="w-5 h-5 opacity-70" />
+                    Logout
+                </button>
                 <button
                     onClick={toggleTheme}
                     className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-[0.95rem] font-medium text-muted-foreground hover:bg-panel hover:text-foreground transition-colors"

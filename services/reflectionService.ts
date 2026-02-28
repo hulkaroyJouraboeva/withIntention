@@ -1,9 +1,9 @@
 import { Reflection } from '@/types'
-import { createClient } from '@/lib/supabase/client'
+import { createSupabaseServerClient } from '@/lib/supabase'
 
 export async function getReflections(): Promise<Reflection[]> {
     try {
-        const supabase = createClient()
+        const supabase = createSupabaseServerClient()
         const { data, error } = await supabase
             .from('reflections')
             .select('*')
@@ -19,7 +19,7 @@ export async function getReflections(): Promise<Reflection[]> {
 
 export async function saveReflection(reflection: Omit<Reflection, 'id' | 'created_at'>) {
     try {
-        const supabase = createClient()
+        const supabase = createSupabaseServerClient()
         const user = await supabase.auth.getUser()
 
         // For local dev mockup, do not block
