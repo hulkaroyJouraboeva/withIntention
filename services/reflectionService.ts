@@ -1,3 +1,5 @@
+"use server"
+
 import { Reflection } from '@/types'
 import { createSupabaseServerClient } from '@/lib/supabase'
 

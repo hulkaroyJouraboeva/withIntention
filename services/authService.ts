@@ -1,3 +1,5 @@
+"use server"
+
 import { createSupabaseServerClient } from '@/lib/supabase'
 
 export async function login(email: string, password: string) {
