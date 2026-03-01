@@ -1,5 +1,7 @@
 import { getReflections } from '@/services/reflectionService'
 
+export const dynamic = 'force-dynamic'
+
 export default async function LibraryPage() {
     const reflections = await getReflections()
     const categoriesList = ['Academic', 'Entertainment', 'Work', 'Internship', 'Misc'] as const

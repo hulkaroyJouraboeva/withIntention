@@ -2,6 +2,8 @@ import { DashboardStats } from '@/components/DashboardStats'
 import { Charts } from '@/components/Charts'
 import { getReflections } from '@/services/reflectionService'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
     const reflections = await getReflections()
 
